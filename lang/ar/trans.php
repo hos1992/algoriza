@@ -1,0 +1,21 @@
+<?php
+return [
+    'add new' => 'اضافة جديد',
+    'edit' => 'تعديل',
+    'name' => 'الأسم',
+    'email' => 'البريد الألكترونى',
+    'password' => 'كلمة المرور',
+    'password confirmation' => 'تأكيد كلمة المرور',
+    'add new admin' => 'اضافة مدير جديد',
+    'wrong data provided !' => 'تم ادخال بيانات خاطئة !',
+    'add new role' => 'اضافة منصب جديد',
+    'permissions' => 'الصلاحيات',
+    'roles' => 'المناصب',
+    'add new category' => 'اضافة قسم جديد',
+    'parent categories tree' => 'الأقسام الأعلى',
+    'active state ?' => 'حالة التفعيل ؟',
+    'confirm change active state !' => 'تأكيد تغير حالة التفعيل ؟',
+    'active' => 'مفعل',
+    'not active' => 'غير مفعل',
+    'parent category' => 'القسم الأعلى',
+];
