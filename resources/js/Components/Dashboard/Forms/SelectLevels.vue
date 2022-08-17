@@ -22,6 +22,7 @@ const props = defineProps({
     },
     onChangeUrl: String,
     error: String,
+    editModelId: [Number, String],
 });
 
 let levelsRef = ref(props.levels);
@@ -34,7 +35,8 @@ watch(selected, value => {
 
 let triggerChange = (e) => {
     selected.value = e.target.value;
-    axios.get(props.onChangeUrl + '&id=' + e.target.value + '&editCategoryId=' + props.modelValue, {}).then(response => {
+    let editModelId = props.editModelId ? '&editCategoryId=' + props.editModelId : '';
+    axios.get(props.onChangeUrl + '&id=' + e.target.value + editModelId, {}).then(response => {
         console.log(response.data);
         levelsRef.value = response.data;
     });

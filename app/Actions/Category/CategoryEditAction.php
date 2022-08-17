@@ -104,6 +104,7 @@ class CategoryEditAction extends Action
                     'name' => 'parent_id',
                     'levels' => App::call(new CategoryUpdateSelectLevelsAction($this->model->id, true, $this->model->id)),
                     'value' => $this->model->parent_id,
+                    'editModelId' => $this->model->id,
                     'onChangeUrl' => route('categories.update-select-levels') . '?forEditForm=1'
                 ],
                 // END INPUT

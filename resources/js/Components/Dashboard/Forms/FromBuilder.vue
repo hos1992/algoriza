@@ -268,6 +268,7 @@ const formSubmit = () => {
                         :id="input.name"
                         :levels="input.levels"
                         :on-change-url="input.onChangeUrl"
+                        :edit-model-id="input.editModelId"
                         :multiple="input.multiple"
                         :disabled="input.disabled"
                         :error="form.errors[input.name]"

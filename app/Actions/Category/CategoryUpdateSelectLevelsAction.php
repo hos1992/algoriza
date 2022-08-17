@@ -55,18 +55,8 @@ class CategoryUpdateSelectLevelsAction extends Action
                 $this->levels[] = $nextLevel;
             }
         } else {
-            // if the $this->category has ancestors
 
-            if (!$this->forEditForm) {
-
-                $this->updateLevelsForCreating();
-
-            } else {
-
-                $this->updateLevelsForUpdating();
-
-            }
-
+            $this->updateLevelsForCreating();
 
         }
 
@@ -112,35 +102,34 @@ class CategoryUpdateSelectLevelsAction extends Action
     /**
      * @return void
      */
-    public function updateLevelsForUpdating()
-    {
-        if ($this->editCategoryId == $this->category->id) {
-            $scope = $this->category->ancestors();
-        } else {
-
-            $scope = $this->category->ancestorsAndSelf();
-        }
-
-        $ancestors = $scope->with('siblingsAndSelf')->orderBy('id', 'ASC')->get();
-
-        foreach ($ancestors as $ancestor) {
-            $level = [
-                'options' => array_filter($ancestor->siblingsAndSelf->map(function ($val) {
-
-                    if ($val['id'] != $this->category->id) {
-                        return [
-                            'value' => $val['id'],
-                            'label' => $val['name'],
-                        ];
-                    }
-
-
-                })->toArray()),
-                'selected' => $ancestor->id,
-            ];
-            $this->levels[] = $level;
-        }
-
-    }
+//    public function updateLevelsForUpdating()
+//    {
+////        if ($this->editCategoryId == $this->category->id) {
+////            $scope = $this->category->ancestors();
+////        } else {
+////            $scope = $this->category->ancestorsAndSelf();
+////        }
+//
+//        $ancestors = $this->category->ancestors()->with('siblingsAndSelf')->orderBy('id', 'ASC')->get();
+//
+//        foreach ($ancestors as $ancestor) {
+//            $level = [
+//                'options' => array_filter($ancestor->siblingsAndSelf->map(function ($val) {
+//
+//                    if ($val['id'] != $this->editCategoryId) {
+//                        return [
+//                            'value' => $val['id'],
+//                            'label' => $val['name'],
+//                        ];
+//                    }
+//
+//
+//                })->toArray()),
+//                'selected' => $ancestor->id,
+//            ];
+//            $this->levels[] = $level;
+//        }
+//
+//    }
 
 }

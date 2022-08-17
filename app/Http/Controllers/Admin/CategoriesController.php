@@ -100,10 +100,19 @@ class CategoriesController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:100',
-            'parent_id' => 'nullable|exists:categories,id',
+            'parent_id' => 'nullable|exists:categories,id|not_in:' . $id,
         ]);
 
-        App::call(new CategoryUpdateAction(Category::find($id), $request->only(['name', 'parent_id'])));
+        $category = Category::find($id);
+        $parent = Category::find($request->parent_id);
+        if ($parent->parent_id == $category->id) {
+            $error = \Illuminate\Validation\ValidationException::withMessages([
+                'parent_id' => ['Parent id is invalid !'],
+            ]);
+            throw $error;
+        }
+
+        App::call(new CategoryUpdateAction($category, $request->only(['name', 'parent_id'])));
 
         return back();
 
@@ -141,6 +150,6 @@ class CategoriesController extends Controller
      */
     public function updateSelectLevels(Request $request)
     {
-        return App::call(new CategoryUpdateSelectLevelsAction($request->id, $request->forEditForm));
+        return App::call(new CategoryUpdateSelectLevelsAction($request->id, $request->forEditForm, $request->editCategoryId));
     }
 }
