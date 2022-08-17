@@ -6,6 +6,7 @@ use App\Actions\Admins\AdminStoreAction;
 use App\Actions\Category\CategoryCreateAction;
 use App\Actions\Category\CategoryEditAction;
 use App\Actions\Category\CategoryIndexAction;
+use App\Actions\Category\CategoryStoreAction;
 use App\Actions\Category\CategoryUpdateAction;
 use App\Actions\Category\CategoryUpdateSelectLevelsAction;
 use App\Http\Controllers\Controller;
@@ -61,7 +62,7 @@ class CategoriesController extends Controller
             'parent_id' => 'nullable|exists:categories,id',
         ]);
 
-        App::call(new AdminStoreAction($request->only(['name', 'parent_id'])));
+        App::call(new CategoryStoreAction($request->only(['name', 'parent_id'])));
 
         return redirect()->route('categories.index');
     }

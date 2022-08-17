@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Actions\Category;
+namespace App\Actions\Product;
 
 use App\Actions\Action;
-use App\Models\Category;
+use App\Actions\Category\CategoryUpdateSelectLevelsAction;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 
-class CategoryEditAction extends Action
+class ProductEditAction extends Action
 {
     private $model;
     private $forModal;
@@ -40,8 +41,8 @@ class CategoryEditAction extends Action
     {
         // return false;
         return [
-            'heading' => 'الأقسام',
-            'headingUrl' => route('categories.index'),
+            'heading' => 'المنتجات',
+            'headingUrl' => route('products.index'),
             'tree' => [
                 //    [
                 //         'type' => 'url',
@@ -61,7 +62,7 @@ class CategoryEditAction extends Action
      */
     private function getFormAction()
     {
-        return route('categories.update', $this->model->id);
+        return route('products.update', $this->model->id);
     }
 
     /**
@@ -71,14 +72,15 @@ class CategoryEditAction extends Action
     {
 
         return [
+
             // ROW
             [
                 // input
                 [
-                    'label' => __('trans.name'),
-                    'type' => 'text',
-                    'name' => 'name',
-                    'value' => $this->model->name
+                    'label' => __('trans.image'),
+                    'type' => 'image',
+                    'name' => 'image',
+                    'value' => Storage::url($this->model->image),
                 ],
                 // END INPUT
 
@@ -96,20 +98,65 @@ class CategoryEditAction extends Action
 
             // ROW
             [
-
                 // input
                 [
-                    'label' => __('trans.parent category'),
-                    'type' => 'select_levels',
-                    'name' => 'parent_id',
-                    'levels' => App::call(new CategoryUpdateSelectLevelsAction($this->model->id, true, $this->model->id)),
-                    'value' => $this->model->parent_id,
-                    'onChangeUrl' => route('categories.update-select-levels') . '?forEditForm=1'
+                    'label' => __('trans.name'),
+                    'type' => 'text',
+                    'name' => 'name',
+                    'value' => $this->model->name
                 ],
                 // END INPUT
 
             ],
             // END ROW
+
+            // ROW
+            [
+                // input
+                [
+                    'label' => __('trans.description'),
+                    'type' => 'textarea',
+                    'name' => 'description',
+                    'value' => $this->model->description
+                ],
+                // END INPUT
+
+            ],
+            // END ROW
+
+
+            // ROW
+            [
+
+                // input
+                [
+                    'label' => __('trans.parent category'),
+                    'type' => 'select_levels',
+                    'name' => 'category_id',
+                    'levels' => App::call(new CategoryUpdateSelectLevelsAction($this->model->category_id)),
+                    'value' => $this->model->category_id,
+                    'onChangeUrl' => route('categories.update-select-levels') . '?'
+                ],
+                // END INPUT
+
+            ],
+            // END ROW
+
+            // ROW
+            [
+                // input
+                [
+                    'label' => __('trans.tags'),
+                    'type' => 'text',
+                    'name' => 'tags',
+                    'placeholder' => 'tag,tag,tag',
+                    'value' => implode(',', $this->model->tags->pluck('name')->toArray())
+                ],
+                // END INPUT
+
+            ],
+            // END ROW
+
 
         ];
     }

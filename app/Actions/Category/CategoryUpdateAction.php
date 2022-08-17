@@ -2,7 +2,9 @@
 
 namespace App\Actions\Category;
 
-class CategoryUpdateAction
+use App\Actions\Action;
+
+class CategoryUpdateAction extends Action
 {
     private $model;
     private $data;

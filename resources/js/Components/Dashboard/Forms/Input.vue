@@ -5,7 +5,7 @@ defineProps({
     name: String,
     type: String,
     label: String,
-    placeHolder: String,
+    placeholder: String,
     className: String,
     id: String,
     modelValue: String,
@@ -23,7 +23,7 @@ defineProps({
                :type="type"
                :id="id"
                :name="name"
-               :placeholder="placeHolder ?? ''"
+               :placeholder="placeholder ?? ''"
                :value="modelValue"
                :disabled="disabled"
                @input="$emit('update:modelValue', $event.target.value)"

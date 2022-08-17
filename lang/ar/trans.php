@@ -18,4 +18,9 @@ return [
     'active' => 'مفعل',
     'not active' => 'غير مفعل',
     'parent category' => 'القسم الأعلى',
+    'add new product' => 'اضافة منتج جديد',
+    'image' => 'الصورة',
+    'category' => 'القسم',
+    'description' => 'الوصف',
+    'tags' => 'تاجز للمنتج ( Tags )',
 ];

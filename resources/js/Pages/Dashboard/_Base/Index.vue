@@ -171,9 +171,16 @@ let openConfirmModalAction = (url, redirectUrl, modalTitle) => {
                                 <td v-if="item['type'] === 'text'">{{ model[key] }}</td>
 
                                 <!--// IMAGE-->
-                                <!-- <td v-if="item['type'] === 'image'">
-                                                                          <IndexImage :src="model[key]" alt="thumb-image" />
-                                                                        </td> -->
+                                <td v-if="item['type'] === 'image'">
+                                    <a :href="model[key]" target="_blank">
+                                        <img
+                                            :src="model[key]"
+                                            :alt="'image'"
+                                            width="70"
+                                            class="current-image"
+                                        />
+                                    </a>
+                                </td>
 
                                 <!--// BADGE-->
                                 <td v-if="item['type'] === 'badge'">

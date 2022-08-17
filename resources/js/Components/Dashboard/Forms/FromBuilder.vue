@@ -130,8 +130,9 @@ const form = useForm(
 const formSubmit = () => {
     form.clearErrors();
     form.submit(props.formMethod, props.formAction, {
-        preserveScroll: true,
+        // forceFormData: true,
         forceFormData: true,
+        preserveScroll: true,
         onSuccess: () => {
 
             if (props.resetOnSubmit) {
@@ -168,11 +169,12 @@ const formSubmit = () => {
             });
         },
     });
+
 };
 </script>
 
 <template>
-    <form @submit.prevent="formSubmit" class="form" :class="formClass">
+    <form @submit.prevent="formSubmit" class="form" :class="formClass" enctype="multipart/form-data">
         <div
             v-for="row in formRows"
             class="uk-grid-medium uk-child-width-expand@s"
@@ -197,6 +199,7 @@ const formSubmit = () => {
                         :type="input.type"
                         :label="input.label"
                         :name="input.name"
+                        :placeholder="input.placeholder"
                         :id="input.name"
                         :disabled="input.disabled"
                         :error="form.errors[input.name]"

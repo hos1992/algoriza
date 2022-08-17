@@ -12,7 +12,7 @@ class Category extends Model
 
     protected $guarded = [];
 
-    protected $appends = ['toggle-active-state-url'];
+    protected $appends = ['actions_urls', 'toggle-active-state-url'];
 
 
     public function getActionsUrlsAttribute()

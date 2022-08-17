@@ -149,8 +149,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'image' => [
+            'uploaded' => 'The image is to large please choose smaller image',
         ],
     ],
 

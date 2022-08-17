@@ -18,11 +18,15 @@ class AdminStoreAction extends Action
 
     public function __invoke()
     {
+        if (isset($this->data['roles']) && !empty($this->data['roles'])) {
+            $roles = $this->data['roles'];
+        }
+        unset($this->data['roles']);
+        $admin = Admin::create($this->data);
+        if (isset($roles)) {
+            $admin->syncRoles($roles);
+        }
 
-        $category = Category::create([
-            'name' => $this->data['name'],
-            'parent_id' => $this->data['parent_id'] ?? null
-        ]);
-        return $category;
+        return $admin;
     }
 }
